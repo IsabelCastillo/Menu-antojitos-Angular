@@ -1,0 +1,83 @@
+<div class=" titulo text-center">
+    <h1>Gestion de Menu de Antojitos Mexicanos</h1>
+</div>
+
+<hr>
+<div class="row">
+    <div class=" container col-md-6">
+        <label>Registro de categorias</label>
+        <hr>
+        <form #formCategoria="ngForm">
+            <div class="form-group">
+                <input type="text" [(ngModel)]="categoria.strNombre" #strNombre="ngModel" name="strNombre" class="form-control" id="strNombre" placeholder="Nombre de categoria">
+            </div>
+
+            <div class="form-group">
+                <textarea class="form-control" [(ngModel)]="categoria.strDescripcion" #strDescripcion="ngModel" name="strDescripcion" id="strDescripcion" rows="3" placeholder="Descripción"></textarea>
+            </div>
+
+            <button type="button" class="btn btn-danger mr-2" style="width: 45%; ">Cancelar</button>
+            <button type="button" (click)="registrarCategoria(formCategoria)" class="btn btn-success mr-2" style="width: 45%;">Registrar</button>
+
+
+
+        </form>
+    </div>
+
+    <div class="container col-md-6">
+        <div class="row">
+            <div class="container col-9">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Buscar..." [(ngModel)]="buscar">
+                </div>
+            </div>
+
+            <div class="container col-3">
+                <a class="btn btn-primary" href="#" dropdownMenuLink role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    ...
+                  </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <i class="fa fa-file-pdf-o"></i>
+                    <a class="dropdown-item" (click)="downloadPDF()"> <i class="fas fa-file-pdf"></i> PDF</a>
+                    <a class="dropdown-item" (click)="exportarExcel()"><i class="fas fa-file-excel"></i> EXCEL</a>
+
+                </div>
+            </div>
+        </div>
+        <div id="htmlData" #htmlData>
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr #scrollMe>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Descripción</th>
+                        <th scope="col">Acciones</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor=" let categoria of categorias | filtroC:buscar | paginate: {itemsPerPage: 5, currentPage: pageActual}">
+
+                        <td>{{categoria.strNombre}}</td>
+                        <td>{{categoria.strDescripcion}}</td>
+                        <td>
+
+                            <a class="btn btn-primary" href="#" dropdownMenuLink role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  ...
+                                </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+
+                                <a class="dropdown-item" (click)="editarCategoria(categoria)"><i class="fas fa-edit"></i> Editar</a>
+                                <a class="dropdown-item" href="#"><i class="fas fa-check-square"></i> Activar/Desactivar</a>
+                                <div class="dropdown-divider"></div>
+                                <div><a class="dropdown-item" href="#"><i class="fas fa-utensils"></i> Gestionar platillo</a></div>
+
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
+        </div>
+
+    </div>
+</div>

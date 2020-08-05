@@ -1,0 +1,96 @@
+<div class="text-center">
+    <h1>Gestion de Menu de Antojitos Mexicanos</h1>
+</div>
+
+<hr>
+<div class="row">
+    <div class="container col-md-6">
+        <label>Registro de platillos</label>
+        <hr>
+        <form #formPlatillo="ngForm">
+            <div class="form-group">
+                <input [class.is-invalid]="strNombre.invalid && strNombre.touched" type="text" [(ngModel)]="platillo.strNombre" required #strNombre="ngModel" name="strNombre" id="strNombre" class="form-control" id="Nombre" placeholder="Nombre de categoria">
+                <div class="invalid-feedback" *ngIf="strNombre.errors?.required">
+                    <small>Es necesario ingresar el nombre</small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <textarea class="form-control" [(ngModel)]="platillo.strDescripcion" #strDescripcion="ngModel" name="strDescripcion" id="strDescripcion" class="form-control" id="Nombre" rows="3" placeholder="Descripción"></textarea>
+            </div>
+
+            <div class="form-group">
+                <textarea class="form-control" [(ngModel)]="platillo.strIngredientes" #strIngredientes="ngModel" name="strIngredientes" id="strIngredientes" rows="3" placeholder="Ingredientes"></textarea>
+            </div>
+
+            <div class="form-group">
+                <input type="text" [(ngModel)]="platillo.nmbPiezas" #nmbPiezas="ngModel" name="nmbPiezas" id="nmbPiezas" class="form-control" placeholder="Numero de piezas">
+            </div>
+
+            <div class="form-group">
+                <input type="text" [(ngModel)]="platillo.nmbPrecio" #nmbPrecio="ngModel" name="nmbPrecio" id="nmbPrecio" class="form-control" placeholder="Precio">
+            </div>
+
+            <button type="reset" class="btn btn-danger mr-2" style="width: 45%;">Cancelar</button>
+            <button type="button" (click)="registrarPlatillo(formPlatillo)" class="btn btn-success  mr-2" style="width: 45%;">Registrar</button>
+        </form>
+    </div>
+
+    <div class=" container col-md-6">
+        <div class="row">
+            <div class="container col-9">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Buscar..." [(ngModel)]="buscar">
+                </div>
+            </div>
+
+            <div class="container col-3">
+                <a class="btn btn-primary" href="#" dropdownMenuLink role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    ...
+                  </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" (click)="downloadPDF()">PDF</a>
+                    <a class="dropdown-item" (click)="exportarExcel()">EXCEL</a>
+
+                </div>
+            </div>
+        </div>
+        <div id="htmlData" #htmlData>
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr #scrollMe>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Descripción</th>
+                        <th scope="col">Ingredientes</th>
+                        <th scope="col">Piezas</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">Acciones</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor=" let platillo of platillos | filtro:buscar | paginate: {itemsPerPage: 5, currentPage: pageActual}">
+                        <td>{{platillo.strNombre}}</td>
+                        <td>{{platillo.strDescripcion}}</td>
+                        <td>{{platillo.strIngredientes}}</td>
+                        <td>{{platillo.nmbPiezas}}</td>
+                        <td>{{platillo.nmbPrecio}}</td>
+                        <td>
+
+                            <a class="btn btn-primary" href="#" dropdownMenuLink role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  ...
+                                </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" (click)="editarPlatillo(platillo)">Editar</a>
+                                <a class="dropdown-item" href="#">Activar/Desactivar</a>
+
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
+        </div>
+
+    </div>
+</div>

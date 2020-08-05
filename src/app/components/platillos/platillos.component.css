@@ -1,0 +1,11 @@
+.container {
+    padding-top: 50px;
+    padding-left: 50px;
+    padding-bottom: 50px;
+    padding-right: 50px;
+}
+
+label {
+    font-size: large;
+    font-weight: bold;
+}
