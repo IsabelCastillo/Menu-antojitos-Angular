@@ -59,7 +59,7 @@ export class CategoriasComponent implements OnInit {
       this.obtenerCategorias();
       Swal.fire({
         icon: 'success',
-        text: `¡El platillo ${this.categoria.strNombre} se registró exitosamente!`
+        text: `¡La categoria ${this.categoria.strNombre} se registró exitosamente!`
       });
       form.reset();
      
