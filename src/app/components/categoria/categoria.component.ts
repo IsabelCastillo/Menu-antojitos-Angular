@@ -7,6 +7,7 @@ import { Route } from '@angular/compiler/src/core';
 import * as jsPDF from 'jspdf';
 import { ExcelService } from '../../services/Excel/excel.service';
 import Swal from 'sweetalert2';
+import { Routes, Router } from '@angular/router';
 
 
 // const Toast = Swal.mixin({
@@ -31,7 +32,7 @@ export class CategoriasComponent implements OnInit {
   pageActual: number = 1;
   buscar:string;
 
-  constructor(private categoriaService:CategoriasService, private excelService: ExcelService) {
+  constructor(private categoriaService:CategoriasService, private excelService: ExcelService, private router: Router) {
     this.categoria = new CategoriasModel();
     
    }
@@ -99,5 +100,9 @@ export class CategoriasComponent implements OnInit {
 
   exportarExcel(){
     this.excelService.exportToExcel(this.categorias, 'Categorias');
+  }
+
+  siguientePagina(){
+    this.router.navigateByUrl('platillos')
   }
 }

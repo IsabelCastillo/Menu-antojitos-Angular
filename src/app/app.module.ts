@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, Router } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { CategoriasComponent } from './components/categoria/categoria.component';
@@ -28,7 +28,7 @@ import {ExcelService} from './services/Excel/excel.service';
     RouterModule.forRoot(ROUTES, {useHash: true}),
     FormsModule,
     HttpClientModule,
-    NgxPaginationModule
+    NgxPaginationModule,
   ],
   providers: [ExcelService],
   bootstrap: [AppComponent]
