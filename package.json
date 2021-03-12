@@ -21,7 +21,7 @@
     "@angular/router": "~9.1.9",
     "@ng-bootstrap/ng-bootstrap": "^7.0.0",
     "file-saver": "^2.0.2",
-    "jspdf": "^1.5.3",
+    "jspdf": "^2.3.1",
     "ngx-pagination": "^5.0.0",
     "pdfmake": "^0.1.68",
     "pdfmake-wrapper": "^2.0.0",
